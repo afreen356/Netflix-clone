@@ -14,10 +14,10 @@ final AsyncSnapshot<List<Movie>> snapshot;
     width: double.infinity,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       itemCount: snapshot.data!.length,
       itemBuilder: (context,index){
-       return Padding(padding: EdgeInsets.all(8),
+       return Padding(padding: const EdgeInsets.all(8),
        child: GestureDetector(
         onTap: (){
           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailScreen(movie: snapshot.data![index])));

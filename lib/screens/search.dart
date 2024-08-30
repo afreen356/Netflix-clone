@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:clone/api/api.dart';
 import 'package:clone/model/movie.dart';
 import 'package:clone/screens/search_movie.dart';
+import 'package:clone/widgets/bottomnav.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -14,11 +16,29 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String query ='';
   Future<List<Movie>>? searchResults;
+  Timer? _debounce;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   searchResults =Api().getAllMovies();
+  }
 
   void searchMovies(String query){
     setState(() {
       searchResults=Api().searchMovies(query);
     });
+  }
+
+  void debounce(String value){
+    if(_debounce?.isActive??false)_debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+     setState(() {
+       query =value;
+       searchMovies(query);
+     });
+     });
   }
   
   @override
@@ -28,8 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: IconButton(onPressed: (){
-         Navigator.of(context).pop();
-        }, icon: const Icon(Icons.arrow_back)),
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNav()));
+        }, icon: const Icon(Icons.arrow_back,color: Colors.grey,)),
       ),
       backgroundColor: Colors.black,
       body: Column(children: [
@@ -40,23 +60,22 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           child:  Row(
             children: [
-              SizedBox(width: 15,),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
+              const SizedBox(width: 15,),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 5),
                 child: Icon(Icons.search,size: 25,color: Colors.grey,),
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
                Expanded(
                   child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                       hintText: "Search for a title, person, or genre",
                       hintStyle: TextStyle(color: Colors.white),
                       border: InputBorder.none,
                     ),
                     onChanged: (value) {
-                      query = value;
-                      searchMovies(query);
+                     debounce(value);
                     },
                   ),
                 ),
@@ -64,17 +83,15 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
 
-          Expanded(child: searchResults==null?Center(
-            child: Text('Search for movies',style: TextStyle(color: Colors.white),),
-          ):FutureBuilder<List<Movie>>(
+          Expanded(child: FutureBuilder<List<Movie>>(
             future: searchResults, 
           builder: (context,snapshot){
             if(snapshot.connectionState==ConnectionState.waiting){
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: CircularProgressIndicator(),);
             }else if(snapshot.hasError){
-              return Center(child: Text('Error${snapshot.error}',style: TextStyle(color: Colors.white),),);
+              return Center(child: Text('Error${snapshot.error}',style: const TextStyle(color: Colors.white),),);
             }else if(!snapshot.hasData){
-              return Center(child: Text('No movies found'),);
+              return const Center(child: Text('No movies found'),);
             }else{
                return ListView.builder(
                           itemCount: snapshot.data!.length,

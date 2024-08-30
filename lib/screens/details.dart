@@ -17,7 +17,7 @@ class DetailScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_rounded,
                 color: Colors.white,
               )),
@@ -30,7 +30,7 @@ class DetailScreen extends StatelessWidget {
               movie.title,
             ),
             background: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25)),
               child: Image.network(
@@ -42,63 +42,63 @@ class DetailScreen extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Overview',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
                   movie.overView,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black45),
                             borderRadius: BorderRadius.circular(10)),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Release date:',
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.bold),
                             ),
                             Text(movie.releaseDate,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 17, fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black45),
                             borderRadius: BorderRadius.circular(10)),
                             child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Rating',
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.bold),
                             ),
                           const  Icon(Icons.star,color: Colors.amber,),
-                            Text('${movie.voteAverage.toStringAsFixed(1)}/10', style: TextStyle(
+                            Text('${movie.voteAverage.toStringAsFixed(1)}/10', style: const TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.bold),)
                           ]
                       )

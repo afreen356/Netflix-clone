@@ -15,7 +15,7 @@ class SearchMovie extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: size.width * 0.3,
             height: size.height * 0.2,
             child: Image.network(
@@ -23,7 +23,7 @@ class SearchMovie extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -32,16 +32,16 @@ class SearchMovie extends StatelessWidget {
                 children: [
                   Text(
                     movie.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5), // Add spacing between title and overview
+                  const SizedBox(height: 5), // Add spacing between title and overview
                   Text(
                     movie.overView,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                     ),

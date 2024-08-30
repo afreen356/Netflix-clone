@@ -19,13 +19,13 @@ class Movie{
   });
 
 
-  factory Movie.fromJson(Map<String,dynamic>json){
-    return Movie(title: json["title"], 
-    backDropPath: json['backdrop_path'],
-     originalTitle: json['original_title'],
-      overView: json['overview'], 
-      posterPath: json['poster_path'],
-       releaseDate: json['release_date'], 
-       voteAverage: (json['vote_average']as num).toDouble());
+  factory Movie.fromJson(Map<String,dynamic>comingasmap){
+    return Movie(title: comingasmap["title"], 
+    backDropPath: comingasmap['backdrop_path'],
+     originalTitle: comingasmap['original_title'],
+      overView: comingasmap['overview'], 
+      posterPath: comingasmap['poster_path'],
+       releaseDate: comingasmap['release_date'], 
+       voteAverage: (comingasmap['vote_average']as num).toDouble());
   }
 }

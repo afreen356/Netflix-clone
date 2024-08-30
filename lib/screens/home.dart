@@ -21,6 +21,7 @@ class _HomePgeState extends State<HomePge> {
   Future<List<Movie>>? popularMovies;
   Future<List<Movie>>? watchingUser;
   Future<List<Movie>>? previews;
+ ValueNotifier<List<Movie>> moviesNotifier = ValueNotifier<List<Movie>>([]);
   @override
   void initState() {
     super.initState();
@@ -28,10 +29,14 @@ class _HomePgeState extends State<HomePge> {
     popularMovies = Api().getPopular();
     trendingMovies = Api().getTrendingMovies();
     previews =Api().getPreview();
+    fetchUpcomingMovies();
   }
 
  
-
+   fetchUpcomingMovies() async {
+    List<Movie> upcomingMovies = await Api().getUpcoming();
+    moviesNotifier.value = upcomingMovies;  // Update the ValueNotifier with the fetched data
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -445,3 +450,5 @@ class _HomePgeState extends State<HomePge> {
 //     );
 //   }
 // }
+
+

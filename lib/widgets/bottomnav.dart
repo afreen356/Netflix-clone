@@ -1,5 +1,9 @@
+
+import 'package:clone/screens/comingsoon.dart';
+import 'package:clone/screens/downloads.dart';
 import 'package:clone/screens/home.dart';
 import 'package:clone/screens/search.dart';
+
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
@@ -11,11 +15,13 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
 
-  List<Widget>_screens=[
+   
+
+  final List<Widget>_screens=[
     const HomePge(),
     const SearchScreen(),
-    const Scaffold(),
-    const Scaffold(),
+   const  ComingSoon(),
+    const DownloadScreen(),
     const Scaffold(),
 
   ];
